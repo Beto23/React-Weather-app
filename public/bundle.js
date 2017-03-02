@@ -26577,9 +26577,18 @@
 	var About = function About(props) {
 	    console.log(props, 'props');
 	    return React.createElement(
-	        'h2',
+	        'div',
 	        null,
-	        'About Component'
+	        React.createElement(
+	            'h2',
+	            null,
+	            'About Component'
+	        ),
+	        React.createElement(
+	            'p',
+	            null,
+	            'Welcome to the About page'
+	        )
 	    );
 	};
 	
