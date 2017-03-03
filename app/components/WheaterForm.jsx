@@ -16,7 +16,7 @@ var WheaterForm = React.createClass({
             <div>
                 <form onSubmit={this.onSearch}>
                     <input type="text" ref="location"/>
-                    <button>Get Wheater</button>
+                    <button className="button expanded hollow">Get Wheater</button>
                 </form>
             </div>
         )

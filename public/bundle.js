@@ -25124,7 +25124,7 @@
 	                React.createElement('input', { type: 'text', ref: 'location' }),
 	                React.createElement(
 	                    'button',
-	                    null,
+	                    { className: 'button expanded hollow' },
 	                    'Get Wheater'
 	                )
 	            )
@@ -25138,7 +25138,7 @@
 /* 227 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	var React = __webpack_require__(8);
 	
@@ -25147,13 +25147,13 @@
 	        location = _ref.location;
 	
 	    return React.createElement(
-	        'h2',
-	        null,
-	        'It\'s it ',
+	        "h2",
+	        { className: "text-center" },
+	        "It's it ",
 	        temp,
-	        ' in ',
+	        " in ",
 	        location,
-	        '.'
+	        "."
 	    );
 	};
 	
