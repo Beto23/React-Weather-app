@@ -8,7 +8,7 @@ var About = require('./components/About');
 var Examples = require('./components/Examples');
 
 require('style!css!foundation-sites/dist/foundation.min.css');
-require('style!css!../app/styles/app.css')
+require('style!css!sass!../app/styles/app.scss')
 $(document).foundation();
 
 ReactDOM.render(
