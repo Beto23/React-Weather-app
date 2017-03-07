@@ -1,11 +1,11 @@
 var React = require('react');
 
-var WheaterForm = require('./WheaterForm');
-var WheaterMessage = require('./WheaterMessage');
-var openWeatherMap = require('./../api/openWheaterMap');
+var WeatherForm = require('./WeatherForm');
+var WeatherMessage = require('./WeatherMessage');
+var openWeatherMap = require('./../api/openWeatherMap');
 var ErrorModal =  require('./ErrorModal');
 
-var Wheater = React.createClass({
+var Weather = React.createClass({
     getInitialState: function() {
         return {
           isLoading: false,
@@ -38,7 +38,7 @@ var Wheater = React.createClass({
             if(isLoading) {
                 return <h3>Fetching weather...</h3>
             } else if (temp && location) {
-                return <WheaterMessage temp={temp} location={location}></WheaterMessage>
+                return <WeatherMessage temp={temp} location={location}></WeatherMessage>
             }
         }
         function showErrorModal() {
@@ -48,8 +48,8 @@ var Wheater = React.createClass({
         }
         return (
             <div>
-                <h2>Wheater Component</h2>
-                <WheaterForm onSearch={this.handleSearch}/>
+                <h2 className="page-title">Weather Component</h2>
+                <WeatherForm onSearch={this.handleSearch}/>
                 {renderMessage()}
                 {showErrorModal()}
             </div>
@@ -57,4 +57,4 @@ var Wheater = React.createClass({
     }
 })
 
-module.exports = Wheater;
+module.exports = Weather;

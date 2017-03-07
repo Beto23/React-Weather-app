@@ -104,7 +104,7 @@
 	    hashHistory = _require.hashHistory;
 	
 	var Main = __webpack_require__(223);
-	var Wheater = __webpack_require__(225);
+	var Weather = __webpack_require__(264);
 	var About = __webpack_require__(255);
 	var Examples = __webpack_require__(256);
 	
@@ -120,7 +120,7 @@
 	    { path: '/', component: Main },
 	    React.createElement(Route, { path: 'about', component: About }),
 	    React.createElement(Route, { path: 'examples', component: Examples }),
-	    React.createElement(IndexRoute, { component: Wheater })
+	    React.createElement(IndexRoute, { component: Weather })
 	  )
 	), document.getElementById('app'));
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
@@ -25026,183 +25026,10 @@
 	module.exports = Nav;
 
 /***/ },
-/* 225 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(8);
-	
-	var WheaterForm = __webpack_require__(226);
-	var WheaterMessage = __webpack_require__(227);
-	var openWeatherMap = __webpack_require__(228);
-	var ErrorModal = __webpack_require__(254);
-	
-	var Wheater = React.createClass({
-	    displayName: 'Wheater',
-	
-	    getInitialState: function getInitialState() {
-	        return {
-	            isLoading: false
-	        };
-	    },
-	    handleSearch: function handleSearch(location) {
-	        var that = this;
-	        this.setState({
-	            isLoading: true,
-	            errorMessage: undefined
-	        });
-	
-	        openWeatherMap.getTemp(location).then(function (temp) {
-	            that.setState({
-	                location: location,
-	                temp: temp,
-	                isLoading: false
-	            });
-	        }, function (e) {
-	            that.setState({
-	                isLoading: false,
-	                errorMessage: e.message
-	            });
-	        });
-	    },
-	    render: function render() {
-	        var _state = this.state,
-	            isLoading = _state.isLoading,
-	            temp = _state.temp,
-	            location = _state.location,
-	            errorMessage = _state.errorMessage;
-	
-	
-	        function renderMessage() {
-	            if (isLoading) {
-	                return React.createElement(
-	                    'h3',
-	                    null,
-	                    'Fetching weather...'
-	                );
-	            } else if (temp && location) {
-	                return React.createElement(WheaterMessage, { temp: temp, location: location });
-	            }
-	        }
-	        function showErrorModal() {
-	            if (typeof errorMessage === 'string') {
-	                return React.createElement(ErrorModal, { message: errorMessage });
-	            }
-	        }
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'h2',
-	                null,
-	                'Wheater Component'
-	            ),
-	            React.createElement(WheaterForm, { onSearch: this.handleSearch }),
-	            renderMessage(),
-	            showErrorModal()
-	        );
-	    }
-	});
-	
-	module.exports = Wheater;
-
-/***/ },
-/* 226 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(8);
-	
-	var WheaterForm = React.createClass({
-	    displayName: 'WheaterForm',
-	
-	    onSearch: function onSearch(e) {
-	        e.preventDefault();
-	
-	        var location = this.refs.location.value;
-	
-	        if (location.length > 0) {
-	            this.refs.location.value = '';
-	            this.props.onSearch(location);
-	        }
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'div',
-	            null,
-	            React.createElement(
-	                'form',
-	                { onSubmit: this.onSearch },
-	                React.createElement('input', { type: 'text', ref: 'location' }),
-	                React.createElement(
-	                    'button',
-	                    { className: 'button expanded hollow' },
-	                    'Get Wheater'
-	                )
-	            )
-	        );
-	    }
-	});
-	
-	module.exports = WheaterForm;
-
-/***/ },
-/* 227 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(8);
-	
-	var WheaterMessage = function WheaterMessage(_ref) {
-	    var temp = _ref.temp,
-	        location = _ref.location;
-	
-	    return React.createElement(
-	        "h2",
-	        { className: "text-center" },
-	        "It's it ",
-	        temp,
-	        " in ",
-	        location,
-	        "."
-	    );
-	};
-	
-	module.exports = WheaterMessage;
-
-/***/ },
-/* 228 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var axios = __webpack_require__(229);
-	
-	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?appid=b3f087f298b416ceaab5474a6b6f2740&units=metric';
-	
-	module.exports = {
-	  getTemp: function getTemp(location) {
-	    var encodedLocation = encodeURIComponent(location);
-	    var requestUrl = OPEN_WEATHER_MAP_URL + '&q=' + encodedLocation;
-	
-	    return axios.get(requestUrl).then(function (res) {
-	      if (res.data.cod && res.data.message) {
-	        throw new Error(res.data.message);
-	      } else {
-	        return res.data.main.temp;
-	      }
-	    }, function (res) {
-	      throw new Error('Unable to featch wheater for that location');
-	    });
-	  }
-	};
-	
-	//http://openweathermap.org/current
-
-/***/ },
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
 /* 229 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -26763,7 +26590,7 @@
 	        null,
 	        React.createElement(
 	            "h1",
-	            { className: "text-center" },
+	            { className: "text-center page-title" },
 	            "About"
 	        ),
 	        React.createElement(
@@ -26822,7 +26649,7 @@
 	        null,
 	        React.createElement(
 	            'h1',
-	            { className: 'text-center' },
+	            { className: 'text-center page-title' },
 	            'Examples'
 	        ),
 	        React.createElement(
@@ -27242,10 +27069,187 @@
 	
 	
 	// module
-	exports.push([module.id, ".page-title {\n    background: red;\n}\n\n", ""]);
+	exports.push([module.id, ".page-title {\n  margin-top: 2.5rem;\n  margin-bottom: 2.5rem;\n}\n\ninput[type=search] {\n  box-shadow: none;\n}", ""]);
 	
 	// exports
 
+
+/***/ },
+/* 263 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(8);
+	
+	var WeatherForm = React.createClass({
+	    displayName: 'WeatherForm',
+	
+	    onSearch: function onSearch(e) {
+	        e.preventDefault();
+	
+	        var location = this.refs.location.value;
+	
+	        if (location.length > 0) {
+	            this.refs.location.value = '';
+	            this.props.onSearch(location);
+	        }
+	    },
+	    render: function render() {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'form',
+	                { onSubmit: this.onSearch },
+	                React.createElement('input', { type: 'search', ref: 'location', placeholder: 'Search weather by city' }),
+	                React.createElement(
+	                    'button',
+	                    { className: 'button expanded hollow' },
+	                    'Get Weather'
+	                )
+	            )
+	        );
+	    }
+	});
+	
+	module.exports = WeatherForm;
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(8);
+	
+	var WeatherForm = __webpack_require__(263);
+	var WeatherMessage = __webpack_require__(265);
+	var openWeatherMap = __webpack_require__(266);
+	var ErrorModal = __webpack_require__(254);
+	
+	var Weather = React.createClass({
+	    displayName: 'Weather',
+	
+	    getInitialState: function getInitialState() {
+	        return {
+	            isLoading: false
+	        };
+	    },
+	    handleSearch: function handleSearch(location) {
+	        var that = this;
+	        this.setState({
+	            isLoading: true,
+	            errorMessage: undefined
+	        });
+	
+	        openWeatherMap.getTemp(location).then(function (temp) {
+	            that.setState({
+	                location: location,
+	                temp: temp,
+	                isLoading: false
+	            });
+	        }, function (e) {
+	            that.setState({
+	                isLoading: false,
+	                errorMessage: e.message
+	            });
+	        });
+	    },
+	    render: function render() {
+	        var _state = this.state,
+	            isLoading = _state.isLoading,
+	            temp = _state.temp,
+	            location = _state.location,
+	            errorMessage = _state.errorMessage;
+	
+	
+	        function renderMessage() {
+	            if (isLoading) {
+	                return React.createElement(
+	                    'h3',
+	                    null,
+	                    'Fetching weather...'
+	                );
+	            } else if (temp && location) {
+	                return React.createElement(WeatherMessage, { temp: temp, location: location });
+	            }
+	        }
+	        function showErrorModal() {
+	            if (typeof errorMessage === 'string') {
+	                return React.createElement(ErrorModal, { message: errorMessage });
+	            }
+	        }
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(
+	                'h2',
+	                { className: 'page-title' },
+	                'Weather Component'
+	            ),
+	            React.createElement(WeatherForm, { onSearch: this.handleSearch }),
+	            renderMessage(),
+	            showErrorModal()
+	        );
+	    }
+	});
+	
+	module.exports = Weather;
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(8);
+	
+	var WeatherMessage = function WeatherMessage(_ref) {
+	    var temp = _ref.temp,
+	        location = _ref.location;
+	
+	    return React.createElement(
+	        "h2",
+	        { className: "text-center" },
+	        "It's it ",
+	        temp,
+	        " in ",
+	        location,
+	        "."
+	    );
+	};
+	
+	module.exports = WeatherMessage;
+
+/***/ },
+/* 266 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var axios = __webpack_require__(229);
+	
+	var OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?appid=b3f087f298b416ceaab5474a6b6f2740&units=metric';
+	
+	module.exports = {
+	  getTemp: function getTemp(location) {
+	    var encodedLocation = encodeURIComponent(location);
+	    var requestUrl = OPEN_WEATHER_MAP_URL + '&q=' + encodedLocation;
+	
+	    return axios.get(requestUrl).then(function (res) {
+	      if (res.data.cod && res.data.message) {
+	        throw new Error(res.data.message);
+	      } else {
+	        return res.data.main.temp;
+	      }
+	    }, function (res) {
+	      throw new Error('Unable to featch wheater for that location');
+	    });
+	  }
+	};
+	
+	//http://openweathermap.org/current
 
 /***/ }
 /******/ ]);
